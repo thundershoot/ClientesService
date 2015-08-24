@@ -1,5 +1,13 @@
 package br.net.tiaws.ClientesService;
 
+import java.util.Date;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+import br.net.tiaws.ClientesService.model.Cliente;
+
 /**
  * Hello world!
  *
@@ -8,6 +16,22 @@ public class App
 {
     public static void main( String[] args )
     {
-        System.out.println( "Hello World!" );
+    	System.out.println("Hello World!");
+
+		EntityManagerFactory emfactory = Persistence.createEntityManagerFactory("Eclipselink_JPA");
+		EntityManager entitymanager = emfactory.createEntityManager();
+		entitymanager.getTransaction().begin();
+
+		Cliente cliente = new Cliente();
+		cliente.setFirst_name("Andre");
+		cliente.setLast_name("Silva");
+		cliente.setEmail("andre.w.silva@live.com");
+		cliente.setPassword("123456");
+		cliente.setBirthdate(new Date(1980, 4, 5));
+		cliente.setSignup_date(new Date(2015,8,24));
+		entitymanager.persist(cliente);
+		entitymanager.getTransaction().commit();
+		entitymanager.close();
+		emfactory.close();
     }
 }

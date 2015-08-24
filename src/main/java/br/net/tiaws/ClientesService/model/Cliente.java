@@ -1,32 +1,28 @@
 package br.net.tiaws.ClientesService.model;
 
-import java.util.Calendar;
+import java.util.Date;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.Table;
 
 @Entity
+@Table
 public class Cliente {
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long cod_cliente;
 	
 	private String first_name;
 	private String last_name;
 	private String email;
 	private String password;
-	
-	@Temporal(TemporalType.DATE)
-	private Calendar birthdate;
-	
-	@Temporal(TemporalType.DATE)
-	private Calendar signup_date;
-	
-	private Boolean status;
+	private Date birthdate;
+	private Date signup_date;
+	private boolean status;
 	
 	public Long getCod_cliente() {
 		return cod_cliente;
@@ -58,29 +54,24 @@ public class Cliente {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public Calendar getBirthdate() {
+
+	public Date getBirthdate() {
 		return birthdate;
 	}
-	public void setBirthdate(Calendar birthdate) {
+	public void setBirthdate(Date birthdate) {
 		this.birthdate = birthdate;
 	}
-	public Calendar getSignup_date() {
+	public Date getSignup_date() {
 		return signup_date;
 	}
-	public void setSignup_date(Calendar signup_date) {
+	public void setSignup_date(Date signup_date) {
 		this.signup_date = signup_date;
 	}
-	public Boolean getStatus() {
+	public boolean isStatus() {
 		return status;
 	}
-	public void setStatus(Boolean status) {
+	public void setStatus(boolean status) {
 		this.status = status;
-	}
-	@Override
-	public String toString() {
-		return "Cliente [cod_cliente=" + cod_cliente + ", first_name=" + first_name + ", last_name=" + last_name
-				+ ", email=" + email + ", password=" + password + ", birthdate=" + birthdate + ", signup_date="
-				+ signup_date + ", status=" + status + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -93,7 +84,7 @@ public class Cliente {
 		result = prime * result + ((last_name == null) ? 0 : last_name.hashCode());
 		result = prime * result + ((password == null) ? 0 : password.hashCode());
 		result = prime * result + ((signup_date == null) ? 0 : signup_date.hashCode());
-		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + (status ? 1231 : 1237);
 		return result;
 	}
 	@Override
@@ -140,11 +131,15 @@ public class Cliente {
 				return false;
 		} else if (!signup_date.equals(other.signup_date))
 			return false;
-		if (status == null) {
-			if (other.status != null)
-				return false;
-		} else if (!status.equals(other.status))
+		if (status != other.status)
 			return false;
 		return true;
 	}
+	@Override
+	public String toString() {
+		return "Cliente [cod_cliente=" + cod_cliente + ", first_name=" + first_name + ", last_name=" + last_name
+				+ ", email=" + email + ", password=" + password + ", birthdate=" + birthdate + ", signup_date="
+				+ signup_date + ", status=" + status + "]";
+	}
+
 }
