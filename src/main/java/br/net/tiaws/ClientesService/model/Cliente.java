@@ -9,7 +9,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
 @Entity
-public class cliente {
+public class Cliente {
 
 	@Id
 	@GeneratedValue
@@ -78,7 +78,7 @@ public class cliente {
 	}
 	@Override
 	public String toString() {
-		return "cliente [cod_cliente=" + cod_cliente + ", first_name=" + first_name + ", last_name=" + last_name
+		return "Cliente [cod_cliente=" + cod_cliente + ", first_name=" + first_name + ", last_name=" + last_name
 				+ ", email=" + email + ", password=" + password + ", birthdate=" + birthdate + ", signup_date="
 				+ signup_date + ", status=" + status + "]";
 	}
@@ -102,9 +102,9 @@ public class cliente {
 			return true;
 		if (obj == null)
 			return false;
-		if (!(obj instanceof cliente))
+		if (!(obj instanceof Cliente))
 			return false;
-		cliente other = (cliente) obj;
+		Cliente other = (Cliente) obj;
 		if (birthdate == null) {
 			if (other.birthdate != null)
 				return false;
